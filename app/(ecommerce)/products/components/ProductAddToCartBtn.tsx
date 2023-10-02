@@ -1,27 +1,22 @@
+'use client';
+import Product from '@/model/product';
+import { useAppDispatch } from '@/store';
+import { cartActions } from '@/store/cartSlice';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { cartActions } from '@/store/cartSlice';
 
-const ProductAddToCartBtn: React.FC<{
-	_id: string;
-	title: string;
-	price: number;
-	quantity: number;
-	image: string;
-}> = (props) => {
-	const dispatch = useDispatch();
-
-
+const ProductAddToCartBtn: React.FC<{product : Product}> = (props) => {
+	const dispatch = useAppDispatch();
 
 	const addToCartHandler = () => {
+		console.log(props);
 		dispatch(cartActions.showCartDrawer());
-
 		const product = {
-			_id: props._id,
-			title: props.title,
-			price: props.price,
+			id: props.product.id,
+			title: props.product.title,
+			price: props.product.price,
 			quantity: 1,
-			image: props.image,
+			image: props.product.thumbnail,
 		};
 
 		dispatch(cartActions.addToCart(product));

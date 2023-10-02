@@ -1,20 +1,15 @@
 import { fetcher } from '@/lib/fetcher';
+import { User } from '@/model/user';
 
-
-interface IToken {
-	id: number,
-	email: string,
-	token : string
-}
 
 class AuthService {
-	async login(email: string, password: string) : Promise<IToken> {
+	async login(email: string, password: string) : Promise<User> {
 		const enteredInput = {
 			email,
 			password,
 		};
 
-		const response = await fetcher.fetch<IToken>(
+		const response = await fetcher.fetch<User>(
 			'https://dummyjson.com/auth/login',
 			{
 				method: 'POST',
@@ -22,7 +17,7 @@ class AuthService {
 				body: JSON.stringify({
 					username: email,
 					password: password,
-					// expiresInMins: 60, // optional
+					expiresInMins: 60, 
 				}),
 			}
 		);

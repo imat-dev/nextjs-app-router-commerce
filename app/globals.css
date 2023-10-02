@@ -70,6 +70,9 @@
   * {
     @apply border-border;
   }
+  .container {
+		@apply mx-auto px-7;
+	}
   body {
     @apply bg-background text-foreground;
   }

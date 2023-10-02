@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProductRating: React.FC<{ rating: number, count: number }> = (props) => {
+const ProductRating: React.FC<{ rating: number }> = (props) => {
 	const grayStar = [];
 	const grayStarCount = parseFloat((5 - props.rating).toFixed(0));
 	for (let i = 0; i < grayStarCount - 1; i++) {
@@ -37,7 +37,7 @@ const ProductRating: React.FC<{ rating: number, count: number }> = (props) => {
 	return (
 		<div className="flex items-center space-x-1">
 			{yellowStar}
-            {grayStar}
+			{grayStar}
 		</div>
 	);
 };

@@ -9,16 +9,14 @@ import { Button } from '@/components/ui/button';
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { authService } from '@/services/authService';
-import { error } from 'console';
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 
 const formSchema = z.object({
@@ -44,6 +42,7 @@ const formSchema = z.object({
 
 const LoginForm = () => {
 	const [errorMsg, setErrorMsg] = useState<string>('');
+	const router = useRouter();
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -58,12 +57,13 @@ const LoginForm = () => {
 		// ✅ This will be type-safe and validated.
 
 		try {
-
             const result = await signIn('credentials', {
                 redirect: false,
                 email: values.username,
                 password: values.password,
             });
+
+			router.push('/');
 
 		} catch (error: any) {
 			setErrorMsg('Invalid username or password');

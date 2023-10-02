@@ -8,10 +8,7 @@ interface FetchResponse<T> {
 class Fetcher {
 	constructor() {}
 
-	async fetch<T>(
-		url: string,
-		options: any = {}
-	): Promise<T> {
+	async fetch<T>(url: string, options: any = {}): Promise<T> {
 		const response = await fetch(url, options);
 
 		if (!response.ok) {

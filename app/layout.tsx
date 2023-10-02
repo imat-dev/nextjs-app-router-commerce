@@ -1,7 +1,11 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Header from './components/Header';
+import Header from './components/Header/Header';
+import NextAuthProvider from './components/Provider/NextAuthProvider';
+import ReduxProvider from './components/Provider/ReduxProvider';
+import Portal from './(ecommerce)/cart/components/CartDrawerPortal';
+import CartDrawer from './(ecommerce)/cart/components/CartDrawer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,8 +22,12 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<Header />
-				{children}
+				<NextAuthProvider>
+					<ReduxProvider>
+						<Header />
+						{children}
+					</ReduxProvider>
+				</NextAuthProvider>
 			</body>
 		</html>
 	);

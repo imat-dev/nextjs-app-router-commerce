@@ -3,17 +3,18 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { NextAuthOptions, RequestInternal } from 'next-auth';
 import { authService } from '@/services/authService';
 
-interface User {
+interface AuthUser {
 	id: string;
 	name: string;
 	email: string;
 	token: string;
+	image: string;
 }
 
 export const authOptions: NextAuthOptions = {
 	session: {
 		strategy: 'jwt',
-		maxAge: 1 * 60 * 60 * 24 * 30, // 1 month
+		maxAge: 1 * 60 * 60,
 	},
 	providers: [
 		CredentialsProvider({
@@ -27,20 +28,18 @@ export const authOptions: NextAuthOptions = {
 					RequestInternal,
 					'body' | 'query' | 'headers' | 'method'
 				>
-			): Promise<User> {
+			): Promise<AuthUser> {
 				const user = await authService.login(
 					credentials.email,
 					credentials.password
 				);
 
-				console.log(credentials.email)
-				console.log(credentials.password)
-
 				return {
-					id: credentials.email,
+					id: user.id.toString(),
 					email: credentials.email,
-					name: credentials.email,
+					name: user.name,
 					token: user.token,
+					image: user.image
 				};
 			},
 		}),

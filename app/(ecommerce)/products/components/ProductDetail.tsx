@@ -1,14 +1,14 @@
 import React from 'react';
 import ProductRating from './ProductRating';
 import ProductAddToCartBtn from './ProductAddToCartBtn';
-import { IProduct } from '@/model/product';
+import Product from '@/model/product';
 
-const ProductDetail: React.FC<{ product: IProduct }> = (props) => {
+const ProductDetail: React.FC<{ product: Product }> = (props) => {
 	return (
 		<section className="container mx-auto mt-10 px-5 sm:px-0">
 			<div className="flex sm:flex-nowrap flex-wrap  gap-10">
 				<div className="w-1/3 mx-auto">
-					<img src={props.product.image} />
+					<img src={props.product.images[0]} />
 				</div>
 				<div className="sm:w-2/3 w-100">
 					<div className="flex flex-col h-full justify-center">
@@ -19,23 +19,23 @@ const ProductDetail: React.FC<{ product: IProduct }> = (props) => {
 							${props.product.price}
 						</p>
 
-						<div className="mt-4">
+						<div className="mt-4 flex gap-5">
 							<ProductRating
-								rating={props.product.rating.rate}
-								count={props.product.rating.count}
-							/>
+								rating={props.product.rating}
+								/>
+								{props.product.rating}
 						</div>
 
 						<p className="mt-5">{props.product.description}</p>
 
 						<div className="mt-5">
-							<ProductAddToCartBtn
-								_id={props.product._id}
+							{/* <ProductAddToCartBtn
+								id={props.product.id}
 								title={props.product.title}
 								price={props.product.price}
 								quantity={1}
 								image={props.product.image}
-							/>
+							/> */}
 						</div>
 					</div>
 				</div>

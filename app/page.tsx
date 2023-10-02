@@ -3,10 +3,10 @@ import Link from 'next/link';
 
 export default function Home() {
 	return (
-		<>
-			<h1>Hello</h1>
+		<section className='container'>
+			<h1>Ecommerce</h1>
 			<br></br>
 			<Link href="/users">Users</Link>
-		</>
+		</section>
 	);
 }
